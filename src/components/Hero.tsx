@@ -7,9 +7,12 @@ import {
   Select,
 } from "@chakra-ui/react";
 import movies from "../assets/movies.jpg";
+import { genres } from "../utils/genres";
+import { useHistory } from "react-router-dom";
 
 function Hero() {
   const [isMobile] = useMediaQuery("(max-width:786px)");
+  const history = useHistory();
   return (
     <Flex
       direction="column"
@@ -44,10 +47,16 @@ function Hero() {
         bgColor="white"
         color="black"
         borderRadius="3xl"
-        border="3px solid red"
+        border="3px solid"
+        borderColor="accent"
         mx="2"
+        onChange={(e) => history.push(`/category/${e.target.value}`)}
       >
-        {/* TODO: options with film genres */}
+        {Object.keys(genres).map((o) => (
+          <option value={genres[o]} key={o}>
+            {o}
+          </option>
+        ))}
       </Select>
     </Flex>
   );

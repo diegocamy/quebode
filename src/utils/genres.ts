@@ -1,4 +1,4 @@
-export const genres = {
+export const genres: { [key: string]: string } = {
   Acción: "Action",
   Aventura: "Adventure",
   Animación: "Animation",
