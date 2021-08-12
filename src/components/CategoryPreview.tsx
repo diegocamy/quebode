@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Response } from "../utils/interfaces";
 import MovieCard from "./MovieCard";
@@ -8,20 +8,13 @@ interface Props {
   fetchUrl: string;
 }
 
+const dummy = ["_", "_", "_", "_", "_", "_"];
+
 function CategoryPreview({ fetchUrl, header }: Props) {
   const fetchCategory = async () => await (await fetch(fetchUrl)).json();
-  const { data, error, isLoading } = useQuery<Response>(header, fetchCategory);
-
-  if (error) return <p>error</p>;
-
-  console.log(
-    data?.data.movies.map((m) => {
-      return {
-        id: m.id,
-        title: m.title,
-        duration: m.runtime,
-      };
-    })
+  const { data, error, isLoading, refetch } = useQuery<Response>(
+    header,
+    fetchCategory
   );
 
   return (
@@ -43,16 +36,22 @@ function CategoryPreview({ fetchUrl, header }: Props) {
       >
         {!data && isLoading && (
           <>
-            <MovieCard cover="_" title="_" loading />
-            <MovieCard cover="_" title="_" loading />
-            <MovieCard cover="_" title="_" loading />
-            <MovieCard cover="_" title="_" loading />
-            <MovieCard cover="_" title="_" loading />
+            {dummy.map((d) => (
+              <MovieCard cover="_" title="_" loading />
+            ))}
           </>
         )}
         {data?.data.movies.map((m) => (
           <MovieCard key={m.id} title={m.title} cover={m.medium_cover_image} />
         ))}
+        {error && !isLoading && (
+          <Flex direction="column" align="center">
+            <Text>Ha ocurrido un error</Text>
+            <Button bgColor="accent" color="white" onClick={() => refetch()}>
+              Reintentar
+            </Button>
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );
