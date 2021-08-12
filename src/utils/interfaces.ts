@@ -11,7 +11,7 @@ export interface Response {
 
 export interface Movie {
   id: number;
-  categories: string[];
+  genres: string[];
   large_cover_image: string;
   medium_cover_image: string;
   small_cover_image: string;

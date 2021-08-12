@@ -43,7 +43,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
                 title="_"
                 rating={0}
                 id={0}
-                categories={[]}
+                genres={[]}
                 runtime={0}
                 summary="_"
                 loading
@@ -58,7 +58,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             cover={m.medium_cover_image}
             rating={m.rating}
             id={m.id}
-            categories={m.categories}
+            genres={m.genres}
             runtime={m.runtime}
             summary={m.summary}
           />

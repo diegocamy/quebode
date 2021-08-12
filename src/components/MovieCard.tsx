@@ -1,11 +1,11 @@
-import { Flex, Image, Skeleton, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Image, Skeleton, Text, Tooltip } from "@chakra-ui/react";
 import MovieTooltip from "./MovieTooltip";
 
 interface Props {
   id: number;
   cover: string;
   title: string;
-  categories: string[];
+  genres: string[];
   rating: number;
   runtime: number;
   summary: string;
@@ -18,7 +18,7 @@ function MovieCard({
   loading,
   summary,
   id,
-  categories,
+  genres,
   rating,
   runtime,
 }: Props) {
@@ -35,11 +35,13 @@ function MovieCard({
           label={
             <MovieTooltip
               summary={summary}
-              categories={categories}
+              categories={genres}
               rating={rating}
               runtime={runtime}
             />
           }
+          as={Box}
+          bgColor="green"
           placement="auto"
           hasArrow
         >
