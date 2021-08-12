@@ -8,7 +8,7 @@ function Home() {
       <Hero />
       <CategoryPreview
         header="Populares"
-        fetchUrl="https://yts.mx/api/v2/list_movies.json?limit=5"
+        fetchUrl="https://yts.mx/api/v2/list_movies.json?limit=6"
       />
     </div>
   );
