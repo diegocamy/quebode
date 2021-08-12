@@ -36,13 +36,32 @@ function CategoryPreview({ fetchUrl, header }: Props) {
       >
         {!data && isLoading && (
           <>
-            {dummy.map((d) => (
-              <MovieCard cover="_" title="_" loading />
+            {dummy.map((d, i) => (
+              <MovieCard
+                key={i}
+                cover="_"
+                title="_"
+                rating={0}
+                id={0}
+                categories={[]}
+                runtime={0}
+                summary="_"
+                loading
+              />
             ))}
           </>
         )}
         {data?.data.movies.map((m) => (
-          <MovieCard key={m.id} title={m.title} cover={m.medium_cover_image} />
+          <MovieCard
+            key={m.id}
+            title={m.title}
+            cover={m.medium_cover_image}
+            rating={m.rating}
+            id={m.id}
+            categories={m.categories}
+            runtime={m.runtime}
+            summary={m.summary}
+          />
         ))}
         {error && !isLoading && (
           <Flex direction="column" align="center">
