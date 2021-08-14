@@ -22,5 +22,6 @@ export interface Movie {
   description_full: string;
   title: string;
   title_long: string;
+  year: number;
   torrents: any[]; //todo
 }

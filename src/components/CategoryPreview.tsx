@@ -28,12 +28,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
       m="auto"
     >
       <Heading mb="6">{header}</Heading>
-      <Flex
-        justify="space-evenly"
-        align="flex-start"
-        flexWrap="wrap"
-        width="100%"
-      >
+      <Flex justify="center" align="flex-start" flexWrap="wrap" width="100%">
         {!data && isLoading && (
           <>
             {dummy.map((d, i) => (
@@ -46,6 +41,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
                 genres={[]}
                 runtime={0}
                 summary="_"
+                year={0}
                 loading
               />
             ))}
@@ -61,6 +57,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             genres={m.genres}
             runtime={m.runtime}
             summary={m.summary}
+            year={m.year}
           />
         ))}
         {error && !isLoading && (

@@ -7,9 +7,10 @@ interface Props {
   rating: number;
   categories: string[];
   runtime: number;
+  year: number;
 }
 
-function MovieTooltip({ rating, runtime, categories, summary }: Props) {
+function MovieTooltip({ rating, runtime, categories, summary, year }: Props) {
   return (
     <Box maxWidth="300px" width="fit-content" p="5" fontSize="md">
       <Text fontWeight="bold">Resumen:</Text>
@@ -22,6 +23,10 @@ function MovieTooltip({ rating, runtime, categories, summary }: Props) {
             </Badge>
           ))}
       </Flex>
+      <Text>
+        <span style={{ fontWeight: "bold", marginRight: 3 }}>Año: </span>
+        {year}
+      </Text>
       <Flex align="center">
         <Text fontWeight="bold" mr="2">
           Puntaje:

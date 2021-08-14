@@ -10,11 +10,12 @@ function NavBar() {
       top="0"
       backgroundColor="dark"
       height="55px"
-      as={NavLink}
-      to="/"
       replace
+      zIndex="3"
     >
-      <Heading color="accent">QueBode</Heading>
+      <Heading color="accent" as={NavLink} to="/">
+        QueBode
+      </Heading>
     </Flex>
   );
 }

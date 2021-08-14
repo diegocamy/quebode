@@ -9,6 +9,7 @@ interface Props {
   rating: number;
   runtime: number;
   summary: string;
+  year: number;
   loading?: boolean;
 }
 
@@ -21,6 +22,7 @@ function MovieCard({
   genres,
   rating,
   runtime,
+  year,
 }: Props) {
   return (
     <Flex
@@ -38,6 +40,7 @@ function MovieCard({
               categories={genres}
               rating={rating}
               runtime={runtime}
+              year={year}
             />
           }
           as={Box}
