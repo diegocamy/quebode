@@ -1,5 +1,6 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { MoviePreviewResponse } from "../utils/interfaces";
 import MovieCard from "./MovieCard";
 
@@ -34,13 +35,13 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             {dummy.map((d, i) => (
               <MovieCard
                 key={i}
-                cover="_"
+                cover="#"
                 title="_"
                 rating={0}
                 id={0}
                 genres={[]}
-                summary="_"
-                year="_"
+                summary="#"
+                year="#"
                 loading
               />
             ))}
@@ -64,6 +65,19 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             <Button bgColor="accent" color="white" onClick={() => refetch()}>
               Reintentar
             </Button>
+          </Flex>
+        )}
+        {data && !isLoading && (
+          <Flex justify="flex-end" width="100%" maxWidth="1200px">
+            <Text
+              textTransform="uppercase"
+              as={Link}
+              to={`/category/${header}`}
+              fontSize="xl"
+              mr="5"
+            >
+              Ver todas las {header} &gt;
+            </Text>
           </Flex>
         )}
       </Flex>
