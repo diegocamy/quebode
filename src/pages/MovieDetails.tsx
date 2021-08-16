@@ -9,6 +9,7 @@ import {
   Link,
   Skeleton,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -20,6 +21,7 @@ interface Params {
 }
 
 function MovieDetails() {
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { id } = useParams<Params>();
   const fetchMovieDetails = async () =>
     await (await fetch(`/api/movies/movie/${id}`)).json();
@@ -47,15 +49,18 @@ function MovieDetails() {
 
   return (
     <Box maxWidth="1200px" w="100%" m="auto" py="10">
-      <Flex>
+      <Flex direction={isMobile ? "column" : "row"}>
         <Image
-          maxWidth="400px"
+          maxWidth={isMobile ? "100%" : "400px"}
+          maxH={isMobile ? "350px" : "600px"}
+          objectFit={isMobile ? "contain" : "cover"}
+          h="100%"
           width="100%"
           borderRadius="md"
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
           mr="4"
         />
-        <Box mr="2">
+        <Box mr="2" p={isMobile ? "3" : ""}>
           <Heading>{data?.title}</Heading>
           <Text fontWeight="normal" fontSize="md" mb="2">
             {data?.tagline}
@@ -139,11 +144,15 @@ function MovieDetails() {
         </Box>
       </Flex>
       {data!.trailers.length > 0 && (
-        <>
+        <Box p={isMobile ? "3" : ""}>
           <Heading size="md" my="4">
             Trailers
           </Heading>
-          <Flex flexWrap="wrap">
+          <Flex
+            flexWrap="wrap"
+            direction={isMobile ? "column" : "row"}
+            alignItems="center"
+          >
             {data?.trailers.map((t) => {
               return (
                 <AspectRatio width="290px" ratio={16 / 9} mr="2" mb="2">
@@ -158,7 +167,7 @@ function MovieDetails() {
               );
             })}
           </Flex>
-        </>
+        </Box>
       )}
     </Box>
   );
