@@ -10,7 +10,6 @@ function NavBar() {
       top="0"
       backgroundColor="dark"
       height="55px"
-      replace
       zIndex="3"
     >
       <Heading color="accent" as={NavLink} to="/">

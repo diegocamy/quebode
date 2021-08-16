@@ -8,7 +8,7 @@ interface Props {
   fetchUrl: string;
 }
 
-const dummy = ["_", "_", "_", "_", "_", "_"];
+const dummy = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"];
 
 function CategoryPreview({ fetchUrl, header }: Props) {
   const fetchCategory = async () => await (await fetch(fetchUrl)).json();
@@ -16,8 +16,6 @@ function CategoryPreview({ fetchUrl, header }: Props) {
     header,
     fetchCategory
   );
-
-  console.log(data);
 
   return (
     <Flex
@@ -48,7 +46,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             ))}
           </>
         )}
-        {data?.results.slice(0, 6).map((m) => (
+        {data?.results.slice(0, 12).map((m) => (
           <MovieCard
             key={m.id}
             title={m.title}

@@ -10,13 +10,19 @@ interface Props {
 
 function MovieTooltip({ rating, categories, summary, year }: Props) {
   return (
-    <Box maxWidth="300px" width="fit-content" p="5" fontSize="md">
+    <Box p="5" fontSize="md">
       <Text fontWeight="bold">Resumen:</Text>
       <Text>{summary.substr(0, 320)}...</Text>
-      <Flex my="2">
+      <Flex my="2" flexWrap="wrap">
         {categories &&
           categories.map((c, i) => (
-            <Badge key={i} variant="solid" colorScheme="blackAlpha" mr="2">
+            <Badge
+              key={i}
+              variant="solid"
+              colorScheme="blackAlpha"
+              mr="2"
+              mb="2"
+            >
               {c}
             </Badge>
           ))}
