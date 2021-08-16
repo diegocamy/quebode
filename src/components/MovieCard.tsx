@@ -7,9 +7,8 @@ interface Props {
   title: string;
   genres: string[];
   rating: number;
-  runtime: number;
   summary: string;
-  year: number;
+  year: string;
   loading?: boolean;
 }
 
@@ -21,7 +20,6 @@ function MovieCard({
   id,
   genres,
   rating,
-  runtime,
   year,
 }: Props) {
   return (
@@ -39,7 +37,6 @@ function MovieCard({
               summary={summary}
               categories={genres}
               rating={rating}
-              runtime={runtime}
               year={year}
             />
           }
@@ -57,8 +54,8 @@ function MovieCard({
           />
         </Tooltip>
       </Skeleton>
-      <Skeleton isLoaded={!loading} width="120px" mb="1">
-        <Text maxWidth="170px" w="100%" textAlign="center" mb="1">
+      <Skeleton isLoaded={!loading} width="160px" mb="1">
+        <Text w="100%" mb="1" textAlign="center">
           {title}
         </Text>
       </Skeleton>

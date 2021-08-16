@@ -1,6 +1,6 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { Response } from "../utils/interfaces";
+import { MoviePreviewResponse } from "../utils/interfaces";
 import MovieCard from "./MovieCard";
 
 interface Props {
@@ -12,10 +12,12 @@ const dummy = ["_", "_", "_", "_", "_", "_"];
 
 function CategoryPreview({ fetchUrl, header }: Props) {
   const fetchCategory = async () => await (await fetch(fetchUrl)).json();
-  const { data, error, isLoading, refetch } = useQuery<Response>(
+  const { data, error, isLoading, refetch } = useQuery<MoviePreviewResponse>(
     header,
     fetchCategory
   );
+
+  console.log(data);
 
   return (
     <Flex
@@ -39,25 +41,23 @@ function CategoryPreview({ fetchUrl, header }: Props) {
                 rating={0}
                 id={0}
                 genres={[]}
-                runtime={0}
                 summary="_"
-                year={0}
+                year="_"
                 loading
               />
             ))}
           </>
         )}
-        {data?.data.movies.map((m) => (
+        {data?.results.slice(0, 6).map((m) => (
           <MovieCard
             key={m.id}
             title={m.title}
-            cover={m.medium_cover_image}
-            rating={m.rating}
+            cover={`https://image.tmdb.org/t/p/w500/${m.poster_path}`}
+            rating={m.vote_average}
             id={m.id}
             genres={m.genres}
-            runtime={m.runtime}
-            summary={m.summary}
-            year={m.year}
+            summary={m.overview}
+            year={m.release_date.split("-")[0]}
           />
         ))}
         {error && !isLoading && (

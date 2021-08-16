@@ -1,16 +1,14 @@
 import { Badge, Box, Flex, Text } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
-import { generos } from "../utils/genres";
 
 interface Props {
   summary: string;
   rating: number;
   categories: string[];
-  runtime: number;
-  year: number;
+  year: string;
 }
 
-function MovieTooltip({ rating, runtime, categories, summary, year }: Props) {
+function MovieTooltip({ rating, categories, summary, year }: Props) {
   return (
     <Box maxWidth="300px" width="fit-content" p="5" fontSize="md">
       <Text fontWeight="bold">Resumen:</Text>
@@ -19,7 +17,7 @@ function MovieTooltip({ rating, runtime, categories, summary, year }: Props) {
         {categories &&
           categories.map((c, i) => (
             <Badge key={i} variant="solid" colorScheme="blackAlpha" mr="2">
-              {generos[c]}
+              {c}
             </Badge>
           ))}
       </Flex>
@@ -34,10 +32,6 @@ function MovieTooltip({ rating, runtime, categories, summary, year }: Props) {
         <StarIcon color="yellow" mr="1" w="3" h="3" />
         <Text>{rating}</Text>
       </Flex>
-      <Text>
-        <span style={{ fontWeight: "bold", marginRight: 3 }}>Duracion:</span>{" "}
-        {runtime} minutos
-      </Text>
     </Box>
   );
 }
