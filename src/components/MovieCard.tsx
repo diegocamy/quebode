@@ -1,4 +1,5 @@
 import { Box, Flex, Image, Skeleton, Text, Tooltip } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import MovieTooltip from "./MovieTooltip";
 
 interface Props {
@@ -29,6 +30,8 @@ function MovieCard({
       align="center"
       mx="2"
       position="relative"
+      as={Link}
+      to={`/movie/${id}`}
     >
       <Skeleton mb="1" borderRadius="md" isLoaded={!loading}>
         <Tooltip
