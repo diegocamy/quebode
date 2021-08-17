@@ -149,10 +149,10 @@ function MovieDetails() {
           <Flex
             flexWrap="wrap"
             direction={isMobile ? "column" : "row"}
-            justify="space-evenly"
+            justify={isMobile ? "center" : "space-evenly"}
           >
             {data?.trailers.slice(0, 5).map((t) => {
-              return <Trailer key={t.id} id={t.id} />;
+              return <Trailer key={t.id} id={t.id} title={t.original_title} />;
             })}
           </Flex>
         </Box>
