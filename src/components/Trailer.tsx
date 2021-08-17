@@ -8,6 +8,7 @@ import {
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
+import play from "../assets/play.png";
 
 interface Props {
   id: string;
@@ -18,7 +19,15 @@ function Trailer({ id, title }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   return (
-    <Box onClick={onOpen}>
+    <Box onClick={onOpen} _hover={{ cursor: "pointer" }} position="relative">
+      <Image
+        src={play}
+        position="absolute"
+        top="50%"
+        left="50%"
+        transform="translate(-50%,-50%)"
+        zIndex="2"
+      />
       <>
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
