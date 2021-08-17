@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import Cast from "../components/Cast";
 import SpinnerComponent from "../components/Spinner";
 import Trailer from "../components/Trailer";
 import { MovieDetails as MovieDetailsInterface } from "../utils/interfaces";
@@ -139,6 +140,10 @@ function MovieDetails() {
             }
             return <Text display="inline">{str}</Text>;
           })}
+          <Text fontWeight="bold" mt="2">
+            Elenco:{" "}
+          </Text>
+          <Cast actors={data!.cast} />
         </Box>
       </Flex>
       {data!.trailers.length > 0 && (
