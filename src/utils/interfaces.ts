@@ -54,16 +54,12 @@ export interface SpokenLanguage {
 }
 
 export interface Trailer {
-  iso_639_1: string;
-  iso_3166_1: string;
-  name: string;
-  key: string;
-  site: string;
-  size: number;
-  type: string;
-  official: boolean;
-  published_at: Date;
   id: string;
+  original_title: string;
+  title: string;
+  artist: string;
+  duration: number;
+  publishedAt: Date;
 }
 
 export interface MovieDetails {

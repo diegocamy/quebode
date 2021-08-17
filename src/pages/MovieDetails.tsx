@@ -14,7 +14,9 @@ import {
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SpinnerComponent from "../components/Spinner";
+import Trailer from "../components/Trailer";
 import { MovieDetails as MovieDetailsInterface } from "../utils/interfaces";
+import { minutesToHours } from "../utils/minutesToHours";
 
 interface Params {
   id: string;
@@ -58,7 +60,7 @@ function MovieDetails() {
           width="100%"
           borderRadius="md"
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
-          mr="4"
+          mr="8"
         />
         <Box mr="2" p={isMobile ? "3" : ""}>
           <Heading>{data?.title}</Heading>
@@ -96,51 +98,47 @@ function MovieDetails() {
             Resumen:{" "}
           </Text>
           <Text fontSize="md">{data?.overview}</Text>
-          {data?.homepage && (
+          {data?.homepage && data.homepage.includes("netflix") ? (
+            <Button
+              bgColor="red.600"
+              color="white"
+              as={Link}
+              href={data.homepage}
+              mt="2"
+              _hover={{ bgColor: "red.700", textDecoration: "none" }}
+            >
+              Ver en NETFLIX
+            </Button>
+          ) : (
             <Box my="2">
               <Text mr="2" display="inline" fontWeight="bold" fontSize="md">
                 Sitio Oficial:{" "}
               </Text>
-              <Link fontSize="md" display="inline" href={data.homepage}>
-                {data.homepage}
+              <Link fontSize="md" display="inline" href={data!.homepage}>
+                {data!.homepage}
               </Link>
             </Box>
           )}
-          <Text mr="2" display="inline" fontWeight="bold" fontSize="md">
-            Duración:{" "}
-          </Text>
-          <Text fontSize="md" display="inline">
-            {data?.runtime} minutos.
-          </Text>
-          <Text fontWeight="bold" fontSize="md" my="2">
+          <Box my="2">
+            <Text mr="2" display="inline" fontWeight="bold" fontSize="md">
+              Duración:{" "}
+            </Text>
+            <Text fontSize="md" display="inline">
+              {minutesToHours(data!.runtime)}
+            </Text>
+          </Box>
+          <Text mb="2"></Text>
+          <Text fontWeight="bold" fontSize="md" my="2" mr="2" display="inline">
             Productoras:{" "}
           </Text>
-          <Flex flexWrap="wrap" my="5" justifyContent="flex-start">
-            {data?.production_companies.map((p) => {
-              if (!p.logo_path) return null;
-
-              return (
-                <Flex
-                  justify="center"
-                  align="center"
-                  flexDirection="column"
-                  key={p.id}
-                  m="2"
-                >
-                  <Image
-                    w="60px"
-                    h="60px"
-                    src={`https://image.tmdb.org/t/p/w200/${p.logo_path}`}
-                    mr="2"
-                    mb="2"
-                    objectFit="contain"
-                    alt={p.name}
-                  />
-                  <Text fontSize="sm">{p.name}</Text>
-                </Flex>
-              );
-            })}
-          </Flex>
+          {data?.production_companies.map((p, i, arr) => {
+            let str = "";
+            str = str + p.name;
+            if (arr[i + 1]) {
+              str = str + ", ";
+            }
+            return <Text display="inline">{str}</Text>;
+          })}
         </Box>
       </Flex>
       {data!.trailers.length > 0 && (
@@ -151,20 +149,10 @@ function MovieDetails() {
           <Flex
             flexWrap="wrap"
             direction={isMobile ? "column" : "row"}
-            alignItems="center"
+            justify="space-evenly"
           >
-            {data?.trailers.map((t) => {
-              return (
-                <AspectRatio width="290px" ratio={16 / 9} mr="2" mb="2">
-                  <iframe
-                    width="300"
-                    src={`https://www.youtube.com/embed/${t.key}`}
-                    title={t.name}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </AspectRatio>
-              );
+            {data?.trailers.slice(0, 5).map((t) => {
+              return <Trailer key={t.id} id={t.id} />;
             })}
           </Flex>
         </Box>
