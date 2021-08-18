@@ -90,6 +90,12 @@ export interface MovieDetails {
   vote_count: number;
   trailers: Trailer[];
   cast: Actor[];
+  proveedores: Proveedor[];
+}
+
+export interface Proveedor {
+  nombre: string;
+  enlace: string;
 }
 
 export interface Actor {

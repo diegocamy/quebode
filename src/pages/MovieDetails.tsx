@@ -1,5 +1,4 @@
 import {
-  AspectRatio,
   Badge,
   Box,
   Button,
@@ -7,7 +6,6 @@ import {
   Heading,
   Image,
   Link,
-  Skeleton,
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -138,7 +136,11 @@ function MovieDetails() {
             if (arr[i + 1]) {
               str = str + ", ";
             }
-            return <Text display="inline">{str}</Text>;
+            return (
+              <Text key={i} display="inline">
+                {str}
+              </Text>
+            );
           })}
           <Text fontWeight="bold" mt="2">
             Elenco:{" "}
