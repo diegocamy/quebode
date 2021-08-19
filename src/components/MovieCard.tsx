@@ -11,6 +11,7 @@ interface Props {
   summary: string;
   year: string;
   loading?: boolean;
+  mb?: string;
 }
 
 function MovieCard({
@@ -22,6 +23,7 @@ function MovieCard({
   genres,
   rating,
   year,
+  mb = "0",
 }: Props) {
   return (
     <Flex
@@ -32,6 +34,7 @@ function MovieCard({
       position="relative"
       as={Link}
       to={`/movie/${id}`}
+      mb={mb}
     >
       <Skeleton mb="1" borderRadius="md" isLoaded={!loading}>
         <Tooltip

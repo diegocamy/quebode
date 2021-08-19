@@ -92,7 +92,7 @@ function CategoryPreview({
             <Text
               textTransform="uppercase"
               as={Link}
-              to={`/category/${header}`}
+              to={`/category/${header.toLowerCase()}`}
               fontSize="xl"
               mr="5"
             >
