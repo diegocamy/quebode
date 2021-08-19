@@ -12,6 +12,7 @@ import {
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Cast from "../components/Cast";
+import CategoryPreview from "../components/CategoryPreview";
 import Providers from "../components/Providers";
 import SpinnerComponent from "../components/Spinner";
 import Trailer from "../components/Trailer";
@@ -169,6 +170,14 @@ function MovieDetails() {
         loading={isLoading}
         providers={data!.proveedores}
         title={data!.title}
+      />
+      <CategoryPreview
+        fetchUrl={`/api/movies/similar/${id}`}
+        header="Peliculas similares"
+        numberOfMovies={12}
+        showAllLink={false}
+        centeredHeader={false}
+        headerSize="md"
       />
     </Box>
   );

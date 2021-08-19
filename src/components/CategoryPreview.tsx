@@ -7,16 +7,30 @@ import MovieCard from "./MovieCard";
 interface Props {
   header: string;
   fetchUrl: string;
+  numberOfMovies?: number;
+  showAllLink?: boolean;
+  centeredHeader?: boolean;
+  headerSize?: "sm" | "md" | "lg" | "xl";
 }
 
-const dummy = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"];
-
-function CategoryPreview({ fetchUrl, header }: Props) {
+function CategoryPreview({
+  fetchUrl,
+  header,
+  numberOfMovies = 12,
+  showAllLink = true,
+  centeredHeader = true,
+  headerSize = "lg",
+}: Props) {
   const fetchCategory = async () => await (await fetch(fetchUrl)).json();
   const { data, error, isLoading, refetch } = useQuery<MoviePreviewResponse>(
     header,
     fetchCategory
   );
+
+  const dummy = [];
+  for (let i = 0; i < numberOfMovies; i++) {
+    dummy.push("_");
+  }
 
   return (
     <Flex
@@ -28,7 +42,13 @@ function CategoryPreview({ fetchUrl, header }: Props) {
       w="100%"
       m="auto"
     >
-      <Heading mb="6">{header}</Heading>
+      <Heading
+        mb="6"
+        alignSelf={centeredHeader ? "center" : "flex-start"}
+        size={headerSize}
+      >
+        {header}
+      </Heading>
       <Flex justify="center" align="flex-start" flexWrap="wrap" width="100%">
         {!data && isLoading && (
           <>
@@ -47,7 +67,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             ))}
           </>
         )}
-        {data?.results.slice(0, 12).map((m) => (
+        {data?.results.slice(0, numberOfMovies).map((m) => (
           <MovieCard
             key={m.id}
             title={m.title}
@@ -67,7 +87,7 @@ function CategoryPreview({ fetchUrl, header }: Props) {
             </Button>
           </Flex>
         )}
-        {data && !isLoading && (
+        {data && !isLoading && showAllLink && (
           <Flex justify="flex-end" width="100%" maxWidth="1200px">
             <Text
               textTransform="uppercase"

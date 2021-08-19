@@ -7,8 +7,16 @@ function Home() {
   return (
     <div>
       <Hero />
-      <CategoryPreview header="Populares" fetchUrl="/api/movies/discover" />
-      <CategoryPreview header="Tendencias" fetchUrl="/api/movies/trending" />
+      <CategoryPreview
+        header="Populares"
+        fetchUrl="/api/movies/discover"
+        headerSize="lg"
+      />
+      <CategoryPreview
+        header="Tendencias"
+        fetchUrl="/api/movies/trending"
+        headerSize="lg"
+      />
       <Flex
         justify="center"
         align="center"
