@@ -12,6 +12,7 @@ import {
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Cast from "../components/Cast";
+import Providers from "../components/Providers";
 import SpinnerComponent from "../components/Spinner";
 import Trailer from "../components/Trailer";
 import { MovieDetails as MovieDetailsInterface } from "../utils/interfaces";
@@ -164,6 +165,11 @@ function MovieDetails() {
           </Flex>
         </Box>
       )}
+      <Providers
+        loading={isLoading}
+        providers={data!.proveedores}
+        title={data!.title}
+      />
     </Box>
   );
 }
