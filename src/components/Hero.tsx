@@ -50,11 +50,15 @@ function Hero() {
         border="3px solid"
         borderColor="accent"
         mx="2"
-        onChange={(e) => history.push(`/category/${e.target.value}`)}
+        onChange={(e) =>
+          history.push(
+            `/category/${e.target.value.split(" ").join("-").toLowerCase()}`
+          )
+        }
       >
-        {Object.keys(genres).map((o) => (
-          <option value={genres[o]} key={o}>
-            {o}
+        {genres.map((g) => (
+          <option value={g.name} key={g.id}>
+            {g.name}
           </option>
         ))}
       </Select>
