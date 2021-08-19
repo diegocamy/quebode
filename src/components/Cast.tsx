@@ -7,13 +7,13 @@ interface Props {
 
 function Cast({ actors }: Props) {
   return (
-    <Flex w={"800px"} wrap="nowrap" overflowX="scroll">
+    <Flex w="100%" wrap="nowrap" overflowX="scroll">
       {actors.map((a) => (
         <Box
           key={a.id}
           mr="2"
           mb="2"
-          minW="150px"
+          minW="130px"
           borderRadius="md"
           bgColor="accent"
           color="black"

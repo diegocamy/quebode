@@ -23,7 +23,7 @@ function Providers({ title, loading, providers }: Props) {
       <Flex flexWrap="wrap" justify="center">
         {providers.map((p) => {
           return (
-            <Skeleton isLoaded={!loading}>
+            <Skeleton isLoaded={!loading} key={p.nombre}>
               <Button
                 as={Link}
                 href={p.enlace}

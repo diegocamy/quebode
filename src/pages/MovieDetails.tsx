@@ -33,8 +33,6 @@ function MovieDetails() {
     fetchMovieDetails
   );
 
-  console.log(JSON.stringify(data, null, 2));
-
   if (!data && error) {
     return (
       <Flex>
@@ -54,7 +52,7 @@ function MovieDetails() {
     <Box maxWidth="1200px" w="100%" m="auto" py="10">
       <Flex direction={isMobile ? "column" : "row"}>
         <Image
-          maxWidth={isMobile ? "100%" : "400px"}
+          maxWidth={isMobile ? "100%" : "35%"}
           maxH={isMobile ? "350px" : "600px"}
           objectFit={isMobile ? "contain" : "cover"}
           h="100%"
@@ -63,7 +61,7 @@ function MovieDetails() {
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
           mr="8"
         />
-        <Box mr="2" p={isMobile ? "3" : ""}>
+        <Box mr="2" p={isMobile ? "3" : ""} w={isMobile ? `100%` : "60%"}>
           <Heading>{data?.title}</Heading>
           <Text fontWeight="normal" fontSize="md" mb="2">
             {data?.tagline}
@@ -129,21 +127,7 @@ function MovieDetails() {
             </Text>
           </Box>
           <Text mb="2"></Text>
-          <Text fontWeight="bold" fontSize="md" my="2" mr="2" display="inline">
-            Productoras:{" "}
-          </Text>
-          {data?.production_companies.map((p, i, arr) => {
-            let str = "";
-            str = str + p.name;
-            if (arr[i + 1]) {
-              str = str + ", ";
-            }
-            return (
-              <Text key={i} display="inline">
-                {str}
-              </Text>
-            );
-          })}
+
           <Text fontWeight="bold" mt="2">
             Elenco:{" "}
           </Text>
