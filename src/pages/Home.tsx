@@ -32,7 +32,7 @@ function Home() {
           size="lg"
           width="250px"
           as={Link}
-          to={"/buscar"}
+          to={"/search"}
         >
           Búsqueda Avanzada
         </Button>

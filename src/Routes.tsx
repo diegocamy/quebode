@@ -6,6 +6,7 @@ import Category from "./pages/Category";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import NotFound from "./pages/NotFound";
+import Search from "./pages/Search";
 
 function Routes() {
   return (
@@ -16,6 +17,7 @@ function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/movie/:id" component={MovieDetails} />
         <Route path="/category/:categoria" component={Category} />
+        <Route path="/search" component={Search} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
