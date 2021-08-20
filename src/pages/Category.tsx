@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Select, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
@@ -6,7 +6,7 @@ import MovieCard from "../components/MovieCard";
 import PaginationButtons from "../components/PaginationButtons";
 import SpinnerComponent from "../components/Spinner";
 import { genres } from "../utils/genres";
-import { MoviePreviewResponse } from "../utils/interfaces";
+import { MoviePreviewResponse, SortBy } from "../utils/interfaces";
 
 interface Params {
   categoria: string;
@@ -27,17 +27,24 @@ function generateString(categoria: string): string {
   }
 }
 
-const fetchCategory = async (categoria: string, page: number) =>
-  await (await fetch(generateString(categoria) + page)).json();
+const fetchCategory = async (
+  categoria: string,
+  page: number,
+  order: SortBy | string
+) =>
+  await (
+    await fetch(generateString(categoria) + page + "&sort_by=" + order)
+  ).json();
 
 function Category() {
   const { categoria } = useParams<Params>();
   const client = useQueryClient();
   const [page, setPage] = useState(1);
+  const [order, setOrder] = useState<SortBy | string>("popularity.desc");
 
   const { data, error, isLoading, refetch } = useQuery<MoviePreviewResponse>(
-    [categoria, page],
-    (context) => fetchCategory(categoria, page),
+    [categoria, page, order],
+    (context) => fetchCategory(categoria, page, order),
     {
       keepPreviousData: true,
       staleTime: 5000,
@@ -52,11 +59,11 @@ function Category() {
 
   useEffect(() => {
     if (data && data.total_pages > page) {
-      client.prefetchQuery(["projects", page + 1], () =>
-        fetchCategory(categoria, page + 1)
+      client.prefetchQuery(["projects", page + 1, order], () =>
+        fetchCategory(categoria, page + 1, order)
       );
     }
-  }, [data, page, client, categoria]);
+  }, [data, page, client, categoria, order]);
 
   if (!data && isLoading) return <SpinnerComponent />;
 
@@ -73,6 +80,20 @@ function Category() {
       <Heading textTransform="capitalize" textAlign="center" my="6">
         {categoria}
       </Heading>
+      <Select
+        m="auto"
+        mb="6"
+        width="fit-content"
+        bg="accent"
+        borderColor="accent"
+        color="black"
+        onChange={(e) => setOrder(e.target.value)}
+      >
+        <option value="popularity.desc">Popularidad Desc</option>
+        <option value="popularity.asc">Popularidad Asc</option>
+        <option value="release_date.desc">Lanzamiento Desc</option>
+        <option value="release_date.asc">Lanzamiento Asc</option>
+      </Select>
       <Flex
         justify="center"
         flexWrap="wrap"

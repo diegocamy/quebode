@@ -112,3 +112,9 @@ export interface Actor {
   credit_id: string;
   order: number;
 }
+
+export type SortBy =
+  | "popularity.desc"
+  | "popularity.asc"
+  | "release_date.asc"
+  | "release_date.desc";
