@@ -21,9 +21,9 @@ function generateString(categoria: string): string {
       return "/api/movies/trending?page=";
 
     default:
-      return `/api/movies/category/${genres.find(
-        (g) => g.name.toLowerCase() === "categoria"
-      )}`;
+      return `/api/movies/discover/?with_genres=${
+        genres.find((g) => g.name.toLowerCase() === categoria)?.id
+      }&page=`;
   }
 }
 
@@ -35,15 +35,14 @@ function Category() {
   const client = useQueryClient();
   const [page, setPage] = useState(1);
 
-  const { data, error, isLoading, refetch, isFetching } =
-    useQuery<MoviePreviewResponse>(
-      [categoria, page],
-      (context) => fetchCategory(categoria, page),
-      {
-        keepPreviousData: true,
-        staleTime: 5000,
-      }
-    );
+  const { data, error, isLoading, refetch } = useQuery<MoviePreviewResponse>(
+    [categoria, page],
+    (context) => fetchCategory(categoria, page),
+    {
+      keepPreviousData: true,
+      staleTime: 5000,
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -57,7 +56,7 @@ function Category() {
         fetchCategory(categoria, page + 1)
       );
     }
-  }, [data, page, client]);
+  }, [data, page, client, categoria]);
 
   if (!data && isLoading) return <SpinnerComponent />;
 
