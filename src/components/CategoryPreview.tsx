@@ -2,6 +2,7 @@ import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { MoviePreviewResponse } from "../utils/interfaces";
+import Error from "./Error";
 import MovieCard from "./MovieCard";
 
 interface Props {
@@ -79,14 +80,7 @@ function CategoryPreview({
             year={m.release_date.split("-")[0]}
           />
         ))}
-        {error && !isLoading && (
-          <Flex direction="column" align="center">
-            <Text>Ha ocurrido un error</Text>
-            <Button bgColor="accent" color="white" onClick={() => refetch()}>
-              Reintentar
-            </Button>
-          </Flex>
-        )}
+        {error && !isLoading && <Error refetch={refetch} />}
         {data && !isLoading && showAllLink && (
           <Flex justify="flex-end" width="100%" maxWidth="1200px">
             <Text

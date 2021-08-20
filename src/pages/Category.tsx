@@ -2,6 +2,7 @@ import { Box, Button, Flex, Heading, Select, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
+import Error from "../components/Error";
 import MovieCard from "../components/MovieCard";
 import PaginationButtons from "../components/PaginationButtons";
 import SpinnerComponent from "../components/Spinner";
@@ -69,14 +70,7 @@ function Category() {
 
   return (
     <Box maxWidth="1200px" w="100%" m="auto">
-      {error && !isLoading && (
-        <Flex direction="column" align="center">
-          <Text>Ha ocurrido un error</Text>
-          <Button bgColor="accent" color="white" onClick={() => refetch()}>
-            Reintentar
-          </Button>
-        </Flex>
-      )}
+      {error && !isLoading && <Error refetch={refetch} />}
       <Heading textTransform="capitalize" textAlign="center" my="6">
         {categoria}
       </Heading>

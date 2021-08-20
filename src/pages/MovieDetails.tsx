@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Cast from "../components/Cast";
 import CategoryPreview from "../components/CategoryPreview";
+import Error from "../components/Error";
 import Providers from "../components/Providers";
 import SpinnerComponent from "../components/Spinner";
 import Trailer from "../components/Trailer";
@@ -34,14 +35,7 @@ function MovieDetails() {
   );
 
   if (!data && error) {
-    return (
-      <Flex>
-        <Heading size="md">Ha ocurrido un error</Heading>
-        <Button bgColor="accent" color="black" onClick={() => refetch()}>
-          Reintentar
-        </Button>
-      </Flex>
-    );
+    return <Error refetch={refetch} />;
   }
 
   if (!data && isLoading) {
