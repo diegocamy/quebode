@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { MoviePreviewResponse } from "../utils/interfaces";

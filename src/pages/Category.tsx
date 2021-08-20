@@ -1,7 +1,7 @@
-import { Box, Button, Flex, Heading, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Select } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import Error from "../components/Error";
 import MovieCard from "../components/MovieCard";
 import PaginationButtons from "../components/PaginationButtons";
@@ -43,14 +43,15 @@ function Category() {
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState<SortBy | string>("popularity.desc");
 
-  const { data, error, isLoading, refetch } = useQuery<MoviePreviewResponse>(
-    [categoria, page, order],
-    (context) => fetchCategory(categoria, page, order),
-    {
-      keepPreviousData: true,
-      staleTime: 5000,
-    }
-  );
+  const { data, error, isLoading, refetch, isFetched } =
+    useQuery<MoviePreviewResponse>(
+      [categoria, page, order],
+      (context) => fetchCategory(categoria, page, order),
+      {
+        keepPreviousData: true,
+        staleTime: 5000,
+      }
+    );
 
   useEffect(() => {
     if (data) {
@@ -67,6 +68,10 @@ function Category() {
   }, [data, page, client, categoria, order]);
 
   if (!data && isLoading) return <SpinnerComponent />;
+
+  if (isFetched && data!.results.length < 1) {
+    return <Redirect to="/404" />;
+  }
 
   return (
     <Box maxWidth="1200px" w="100%" m="auto">

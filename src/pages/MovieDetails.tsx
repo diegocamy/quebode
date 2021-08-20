@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import Cast from "../components/Cast";
 import CategoryPreview from "../components/CategoryPreview";
 import Error from "../components/Error";
@@ -29,10 +29,8 @@ function MovieDetails() {
   const { id } = useParams<Params>();
   const fetchMovieDetails = async () =>
     await (await fetch(`/api/movies/movie/${id}`)).json();
-  const { data, isLoading, error, refetch } = useQuery<MovieDetailsInterface>(
-    id,
-    fetchMovieDetails
-  );
+  const { data, isLoading, error, refetch, isFetched } =
+    useQuery<MovieDetailsInterface>(id, fetchMovieDetails);
 
   if (!data && error) {
     return <Error refetch={refetch} />;
@@ -40,6 +38,10 @@ function MovieDetails() {
 
   if (!data && isLoading) {
     return <SpinnerComponent />;
+  }
+
+  if (isFetched && !data?.id) {
+    return <Redirect to="/404" />;
   }
 
   return (

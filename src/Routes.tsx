@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Category from "./pages/Category";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
+import NotFound from "./pages/NotFound";
 
 function Routes() {
   return (
@@ -15,6 +16,7 @@ function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/movie/:id" component={MovieDetails} />
         <Route path="/category/:categoria" component={Category} />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </Router>

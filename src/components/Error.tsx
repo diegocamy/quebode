@@ -1,6 +1,5 @@
 import { Flex, Button, Text } from "@chakra-ui/react";
 import { RefetchOptions, QueryObserverResult } from "react-query";
-import { MoviePreviewResponse } from "../utils/interfaces";
 
 interface Props {
   refetch: (
