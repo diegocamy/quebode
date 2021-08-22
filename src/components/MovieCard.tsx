@@ -1,6 +1,7 @@
 import { Box, Flex, Image, Skeleton, Text, Tooltip } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import MovieTooltip from "./MovieTooltip";
+import movie from "../assets/movie.png";
 
 interface Props {
   id: number;
@@ -25,6 +26,7 @@ function MovieCard({
   year,
   mb = "0",
 }: Props) {
+  console.log(cover);
   return (
     <Flex
       direction="column"
@@ -52,7 +54,7 @@ function MovieCard({
           hasArrow
         >
           <Image
-            src={cover}
+            src={cover.includes("null") ? movie : cover}
             borderRadius="md"
             mb="1"
             width="170px"
