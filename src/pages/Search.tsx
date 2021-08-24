@@ -32,6 +32,10 @@ function Search() {
     setSearchValue(search.slice(1, search.length));
   }, [search]);
 
+  useEffect(() => {
+    document.title = `Que Bode - Buscar`;
+  }, []);
+
   if (!data && isLoading) return <SpinnerComponent />;
 
   return (

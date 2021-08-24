@@ -4,6 +4,11 @@ import notFound from "../assets/404.svg";
 
 function NotFound() {
   const history = useHistory();
+
+  useEffect(() => {
+    document.title = `Que Bode - No encontrado`;
+  }, []);
+
   return (
     <Flex
       justify="center"
@@ -34,3 +39,6 @@ function NotFound() {
 }
 
 export default NotFound;
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}

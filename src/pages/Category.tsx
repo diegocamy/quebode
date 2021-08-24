@@ -67,6 +67,10 @@ function Category() {
     }
   }, [data, page, client, categoria, order]);
 
+  useEffect(() => {
+    document.title = `Que Bode - Películas de ${categoria}`;
+  }, [categoria]);
+
   if (!data && isLoading) return <SpinnerComponent />;
 
   if (isFetched && data!.results.length < 1) {

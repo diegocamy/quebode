@@ -7,7 +7,7 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import CategoryPreview from "../components/CategoryPreview";
 import Hero from "../components/Hero";
@@ -15,6 +15,11 @@ import Hero from "../components/Hero";
 function Home() {
   const history = useHistory();
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    document.title = `Que Bode`;
+  }, []);
+
   return (
     <div>
       <Hero />

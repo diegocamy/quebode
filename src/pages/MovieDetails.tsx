@@ -9,6 +9,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { Redirect, useParams } from "react-router-dom";
 import Cast from "../components/Cast";
@@ -31,6 +32,12 @@ function MovieDetails() {
     await (await fetch(`/api/movies/movie/${id}`)).json();
   const { data, isLoading, error, refetch, isFetched } =
     useQuery<MovieDetailsInterface>(id, fetchMovieDetails);
+
+  useEffect(() => {
+    if (data && data.title) {
+      document.title = `Que Bode - ${data.title}`;
+    }
+  }, [data]);
 
   if (!data && error) {
     return <Error refetch={refetch} />;
