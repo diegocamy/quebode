@@ -18,7 +18,7 @@ function Hero() {
       direction="column"
       justify="center"
       align="center"
-      height={isMobile ? "450px" : "650px"}
+      height={isMobile ? "350px" : "450px"}
       backgroundImage={movies}
       backgroundPosition="center"
       backgroundSize="cover"
@@ -37,7 +37,7 @@ function Hero() {
         Buscando algo para ver?
       </Heading>
       <Text zIndex="2" fontSize={isMobile ? "md" : "xl"}>
-        Encontrá peliculas para mirar YAAAAA
+        Encontrá peliculas para mirar rápidamente y sin publicidades
       </Text>
       <Select
         placeholder="Búsqueda rápida por género"
@@ -45,11 +45,13 @@ function Hero() {
         textAlign="center"
         mt="5"
         bgColor="white"
+        fontSize="lg"
         color="black"
         borderRadius="3xl"
         border="3px solid"
         borderColor="accent"
         mx="2"
+        px="1"
         onChange={(e) =>
           history.push(
             `/category/${e.target.value.split(" ").join("-").toLowerCase()}`

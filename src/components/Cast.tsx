@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Actor } from "../utils/interfaces";
+import person from "../assets/person.png";
 
 interface Props {
   actors: Actor[];
@@ -20,7 +21,13 @@ function Cast({ actors }: Props) {
           textAlign="center"
         >
           <Image
-            src={`https://image.tmdb.org/t/p/w500${a.profile_path}`}
+            src={
+              a.profile_path
+                ? `https://image.tmdb.org/t/p/w500${a.profile_path}`
+                : person
+            }
+            height="195px"
+            objectFit="cover"
             borderTopLeftRadius="md"
             borderTopRightRadius="md"
           />

@@ -26,7 +26,6 @@ function MovieCard({
   year,
   mb = "0",
 }: Props) {
-  console.log(cover);
   return (
     <Flex
       direction="column"

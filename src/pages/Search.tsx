@@ -1,6 +1,6 @@
 import { Search2Icon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, IconButton, Input, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useHistory, useLocation } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
@@ -28,15 +28,19 @@ function Search() {
       { enabled: search.length > 0 }
     );
 
+  useEffect(() => {
+    setSearchValue(search.slice(1, search.length));
+  }, [search]);
+
   if (!data && isLoading) return <SpinnerComponent />;
 
   return (
-    <Box minHeight="89vh" h="100%" maxWidth="1200px" m="auto">
+    <Box minHeight="87.5vh" h="100%" maxWidth="1200px" m="auto">
       <Heading my="4" mx="auto" textAlign="center">
         Buscar
       </Heading>
 
-      <Flex justify="center" mb={"10"}>
+      <Flex justify="center" mb={"10"} px="3">
         <Input
           placeholder="Buscar películas..."
           bg="white"
@@ -100,7 +104,9 @@ function Search() {
       ) : (
         <Box py="6" textAlign="center">
           <Text fontSize="xl">
-            No hay resultados para {search.slice(1, search.length)}
+            {search.slice(1, search.length)
+              ? `No hay resultados para ${search.slice(1, search.length)}`
+              : "Ingresá el nombre de una película para ver resultados"}
           </Text>
         </Box>
       )}
