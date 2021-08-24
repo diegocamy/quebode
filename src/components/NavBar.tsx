@@ -35,11 +35,11 @@ function NavBar() {
           color="accent"
           as={NavLink}
           to="/"
-          fontSize={isMobile ? "md" : "3xl"}
+          fontSize={isMobile ? "lg" : "3xl"}
         >
           QueBode
         </Heading>
-        <InputGroup width="fit-content">
+        <InputGroup width={isMobile ? "200px" : "fit-content"}>
           <InputRightElement
             children={<Search2Icon color="green" />}
             _hover={{ cursor: "pointer" }}
