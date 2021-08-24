@@ -52,6 +52,7 @@ function NavBar() {
           />
           <Input
             placeholder="buscar"
+            border="2px"
             type="text"
             borderColor="green"
             borderRadius="2xl"
