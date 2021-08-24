@@ -53,9 +53,7 @@ function Hero() {
         mx="2"
         px="1"
         onChange={(e) =>
-          history.push(
-            `/category/${e.target.value.split(" ").join("-").toLowerCase()}`
-          )
+          history.push(`/category/${e.target.value.toLowerCase()}`)
         }
       >
         {genres.map((g) => (

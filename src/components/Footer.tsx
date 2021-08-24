@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 
 function Footer() {
   return (
@@ -9,7 +9,16 @@ function Footer() {
       color="white"
       height="50px"
     >
-      <Text>Powered by THEMOVIEDB</Text>
+      <Text>
+        Powered by{" "}
+        <Link
+          href="https://www.themoviedb.org/"
+          target="_blank"
+          fontWeight="bold"
+        >
+          THEMOVIEDB
+        </Link>
+      </Text>
     </Flex>
   );
 }

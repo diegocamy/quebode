@@ -44,13 +44,8 @@ function Category() {
   const [order, setOrder] = useState<SortBy | string>("popularity.desc");
 
   const { data, error, isLoading, refetch, isFetched } =
-    useQuery<MoviePreviewResponse>(
-      [categoria, page, order],
-      (context) => fetchCategory(categoria, page, order),
-      {
-        keepPreviousData: true,
-        staleTime: 5000,
-      }
+    useQuery<MoviePreviewResponse>([categoria, page, order], (context) =>
+      fetchCategory(categoria, page, order)
     );
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import notFound from "../assets/404.svg";
@@ -39,6 +40,3 @@ function NotFound() {
 }
 
 export default NotFound;
-function useEffect(arg0: () => void, arg1: never[]) {
-  throw new Error("Function not implemented.");
-}
