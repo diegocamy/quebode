@@ -7,7 +7,8 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import CategoryPreview from "../components/CategoryPreview";
 import Hero from "../components/Hero";
@@ -16,12 +17,15 @@ function Home() {
   const history = useHistory();
   const [value, setValue] = useState("");
 
-  useEffect(() => {
-    document.title = `Que Bode`;
-  }, []);
-
   return (
     <div>
+      <Helmet>
+        <title>Que Bode - Inicio</title>
+        <meta
+          name="description"
+          content="Encontrá películas para mirar rápido y sin publicidades"
+        />
+      </Helmet>
       <Hero />
       <CategoryPreview
         header="Populares"

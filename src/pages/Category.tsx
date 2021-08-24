@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Select } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery, useQueryClient } from "react-query";
 import { Redirect, useParams } from "react-router-dom";
 import Error from "../components/Error";
@@ -62,10 +63,6 @@ function Category() {
     }
   }, [data, page, client, categoria, order]);
 
-  useEffect(() => {
-    document.title = `Que Bode - Películas de ${categoria}`;
-  }, [categoria]);
-
   if (!data && isLoading) return <SpinnerComponent />;
 
   if (isFetched && data!.results.length < 1) {
@@ -74,6 +71,13 @@ function Category() {
 
   return (
     <Box maxWidth="1200px" w="100%" m="auto">
+      <Helmet>
+        <title>Que Bode - Películas de {categoria}</title>
+        <meta
+          name="description"
+          content="Encontrá películas para mirar rápido y sin publicidades"
+        />
+      </Helmet>
       {error && !isLoading && <Error refetch={refetch} />}
       <Heading textTransform="capitalize" textAlign="center" my="6">
         {categoria}

@@ -9,7 +9,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
 import { Redirect, useParams } from "react-router-dom";
 import Cast from "../components/Cast";
@@ -33,12 +33,6 @@ function MovieDetails() {
   const { data, isLoading, error, refetch, isFetched } =
     useQuery<MovieDetailsInterface>(id, fetchMovieDetails);
 
-  useEffect(() => {
-    if (data && data.title) {
-      document.title = `Que Bode - ${data.title}`;
-    }
-  }, [data]);
-
   if (!data && error) {
     return <Error refetch={refetch} />;
   }
@@ -53,6 +47,20 @@ function MovieDetails() {
 
   return (
     <Box maxWidth="1200px" w="100%" m="auto" py="10">
+      <Helmet>
+        <title>Que Bode - {data?.title}</title>
+        <meta
+          name="description"
+          content="Encontrá películas para mirar rápido y sin publicidades"
+        />
+        <meta
+          property="og:image"
+          content={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
+        />
+        <meta property="og:description" content={data?.overview} />
+        <meta property="og:title" content={data?.title} />
+        <meta property="og:url" content={window.location.href} />
+      </Helmet>
       <Flex direction={isMobile ? "column" : "row"}>
         <Image
           maxWidth={isMobile ? "100%" : "35%"}

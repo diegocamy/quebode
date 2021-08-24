@@ -8,6 +8,7 @@ import SpinnerComponent from "../components/Spinner";
 import { MoviePreviewResponse } from "../utils/interfaces";
 import Error from "../components/Error";
 import PaginationButtons from "../components/PaginationButtons";
+import { Helmet } from "react-helmet";
 
 const fetchSearch = async (search: string, page: number) =>
   await (
@@ -32,14 +33,17 @@ function Search() {
     setSearchValue(search.slice(1, search.length));
   }, [search]);
 
-  useEffect(() => {
-    document.title = `Que Bode - Buscar`;
-  }, []);
-
   if (!data && isLoading) return <SpinnerComponent />;
 
   return (
     <Box minHeight="87.5vh" h="100%" maxWidth="1200px" m="auto">
+      <Helmet>
+        <title>Que Bode - Buscar</title>
+        <meta
+          name="description"
+          content="Encontrá películas para mirar rápido y sin publicidades"
+        />
+      </Helmet>
       <Heading my="4" mx="auto" textAlign="center">
         Buscar
       </Heading>

@@ -1,14 +1,10 @@
-import { useEffect } from "react";
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import notFound from "../assets/404.svg";
+import { Helmet } from "react-helmet";
 
 function NotFound() {
   const history = useHistory();
-
-  useEffect(() => {
-    document.title = `Que Bode - No encontrado`;
-  }, []);
 
   return (
     <Flex
@@ -19,6 +15,13 @@ function NotFound() {
       position="relative"
       direction="column"
     >
+      <Helmet>
+        <title>Que Bode - Página no encontrada</title>
+        <meta
+          name="description"
+          content="Encontrá películas para mirar rápido y sin publicidades"
+        />
+      </Helmet>
       <Image src={notFound} alt="Page not found" maxW="400px" w="100%" mb="6" />
       <Heading>Página no encontrada</Heading>
       <Button
