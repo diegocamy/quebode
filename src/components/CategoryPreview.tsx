@@ -47,6 +47,7 @@ function CategoryPreview({
         mb="6"
         alignSelf={centeredHeader ? "center" : "flex-start"}
         size={headerSize}
+        px="4"
       >
         {header}
       </Heading>

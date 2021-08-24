@@ -18,6 +18,14 @@ import Error from "../components/Error";
 import Providers from "../components/Providers";
 import SpinnerComponent from "../components/Spinner";
 import Trailer from "../components/Trailer";
+import {
+  EmailIcon,
+  EmailShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 import { MovieDetails as MovieDetailsInterface } from "../utils/interfaces";
 import { minutesToHours } from "../utils/minutesToHours";
 
@@ -166,6 +174,28 @@ function MovieDetails() {
         providers={data!.proveedores}
         title={data!.title}
       />
+      <Box mb="2" px="4">
+        <Heading mb="2" fontSize="xl">
+          Comparte {data?.title}
+        </Heading>
+        <Flex>
+          <Box m="1">
+            <WhatsappShareButton url={window.location.href}>
+              <WhatsappIcon borderRadius={10} />
+            </WhatsappShareButton>
+          </Box>
+          <Box m="1">
+            <TelegramShareButton url={window.location.href}>
+              <TelegramIcon borderRadius={10} />
+            </TelegramShareButton>
+          </Box>
+          <Box m="1">
+            <EmailShareButton url={window.location.href}>
+              <EmailIcon borderRadius={10} />
+            </EmailShareButton>
+          </Box>
+        </Flex>
+      </Box>
       <CategoryPreview
         fetchUrl={`/api/movies/similar/${id}`}
         header="Peliculas similares"
