@@ -153,7 +153,7 @@ function MovieDetails() {
           <Cast actors={data!.cast} />
         </Box>
       </Flex>
-      {data!.trailers.length > 0 && (
+      {data!.trailers && (
         <Box p={isMobile ? "3" : ""}>
           <Heading size="md" my="4">
             Trailers
